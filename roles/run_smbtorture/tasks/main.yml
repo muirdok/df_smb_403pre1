@@ -15,7 +15,6 @@
     template: src=templates/addresult_by_title.py dest=addresult_by_title.py owner=root group=root
   
   - include: runme.yml publish={{publish}} WORKSPACE={{WORKSPACE}} process={{process_name}}
-    when: {{base}}==true
     with_items:
        - base.lock.LOCK1.LOCK1
        - base.lock.LOCK2.LOCK2
@@ -103,8 +102,9 @@
        - base.scan-ioctl.scan-ioctl
        - base.scan-maxfid.scan-maxfid
        - base.pipe-flush.pipe-flush
+    when: base|bool == true
+
   - include: runme.yml publish={{publish}} WORKSPACE={{WORKSPACE}} process={{process_name}}
-    when: {{raw}}==true
     with_items:
        - raw.sfileinfo.base.base
        - raw.sfileinfo.rename.rename
@@ -268,9 +268,9 @@
        - raw.samba3caseinsensitive.samba3caseinsensitive
        - raw.samba3posixtimedlock.samba3posixtimedlock
        - raw.scan-eamax.scan-eamax
+    when: raw|bool == true
 
   - include: runme.yml publish={{publish}} WORKSPACE={{WORKSPACE}} process={{process_name}}
-    when: {{smb2}}==true
     with_items:
        - smb2.scan.scan.scan
        - smb2.scan.getinfo.getinfo
@@ -551,9 +551,9 @@
        - smb2.connect.connect
        - smb2.setinfo.setinfo
        - smb2.bench-oplock.bench-oplock
+    when: smb2|bool == true
     
   - include: runme.yml publish={{publish}} WORKSPACE={{WORKSPACE}} process={{process_name}}
-    when: {{rpc}}==true
     with_items:
        - rpc.lsa.lookupsids.lsa.LookupSidsReply
        - rpc.lsa.lookupnames.lsa.LookupNames
@@ -933,9 +933,9 @@
        - rpc.altercontext.altercontext
        - rpc.join.join
        - rpc.bench-rpc.bench-rpc
+    when: rpc|bool == true
       
   - include: runme.yml publish={{publish}} WORKSPACE={{WORKSPACE}} process={{process_name}}
-    when: {{rap}}==true
     with_items:
        - rap.basic.netserverenum.netserverenum
        - rap.basic.netshareenum.netshareenum
@@ -961,9 +961,9 @@
        - rap.sam.useradd.useradd
        - rap.sam.userdelete.userdelete
        - rap.scan.scan
+    when: rap|bool == true
      
   - include: runme.yml publish={{publish}} WORKSPACE={{WORKSPACE}} process={{process_name}}
-    when: {{nbt}}==true
     with_items:
        - nbt.register.register_own.register_own
        - nbt.register.refresh_own.refresh_own
@@ -976,9 +976,10 @@
        - nbt.winsreplication.wins_replication.wins_replication
        - nbt.winsreplication.replica.replica
        - nbt.winsreplication.owned.owned
+    when: nbt|bool == true
+
 
   - include: runme.yml publish={{publish}} WORKSPACE={{WORKSPACE}} process={{process_name}}
-    when: {{net}}==true
     with_items:
        - net.userinfo.userinfo
        - net.useradd.useradd
@@ -1013,9 +1014,9 @@
        - net.api.become.dc.api.become.dc
        - net.api.domlist.api.domlist
        - ntp.signd.ntp_signd
+    when: net|bool == true
 
   - include: runme.yml publish={{publish}} WORKSPACE={{WORKSPACE}} process={{process_name}}
-    when: {{net}}==true
     with_items:
        - winbind.struct.interface_version.interface_version
        - winbind.struct.ping.ping
@@ -1060,11 +1061,9 @@
        - winbind.pac.GSSAPI.GSSAPI
        - winbind.pac.GSS-SPNEGO.GSS-SPNEGO
        - winbind.pac.krb5.krb5
-
-
+    when: net|bool == true
 
   - include: runme.yml publish={{publish}} WORKSPACE={{WORKSPACE}} process={{process_name}}
-    when: {{others}}==true
     with_items:
        - libsmbclient.version.version
        - libsmbclient.initialize.initialize
@@ -1085,3 +1084,4 @@
        - ntp.signd.ntp_signd
        - vfs.fruit
        - echo.udp.udp
+    when: others|bool == true
