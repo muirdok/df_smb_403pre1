@@ -1,0 +1,16 @@
+---
+config_applaince_disk: "c"
+
+config_vm_guest: "solaris11_64Guest"
+config_vm_timeout: 30
+config_vm_deploy_net: "xdeploy"
+config_vm_lab_net: "10x_1G_network"
+config_vm_datastore: "storage_16_2"
+
+config_vsphere_host: "vcenter.hypernexenta.corp"
+config_vsphere_user: "administrator@vsphere.local"
+config_vsphere_password: "Nexenta1!"
+config_vsphere_datacenter: "KRD"
+config_vsphere_folder: "TESTDeploy"
+config_vsphere_cluster: "Cluster_KRD"
+...

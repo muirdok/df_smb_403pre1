@@ -1,0 +1,14 @@
+---
+#common
+test_time: 1800
+
+# Nexenta vars
+process_name: "smbd"
+mount_point: "/"
+
+publish: false
+
+cif_share: "{{ config_applaince_pool }}_{{ config_applaince_pool_fs }}"
+smbtorture_path: "/root/samba/bin/smbtorture"
+
+

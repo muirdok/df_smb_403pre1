@@ -1,0 +1,17 @@
+---
+  - name: Random Delay
+    pause:
+      seconds: "{{ config_ci_delay | random }}"
+
+  - name: Create a Pool
+    shell: diskinfo | grep 32 | awk '{print $2}' | xargs zpool create "{{ config_applaince_pool }}"
+
+  - name: Create a Fylesystem
+    command: zfs create -o casesensitivity=mixed -o nbmand=on "{{ config_applaince_pool }}"/"{{ config_applaince_pool_fs }}"
+
+  - name: Share FS via SMB
+    command: zfs set sharesmb=name="{{ config_applaince_pool }}"_"{{ config_applaince_pool_fs }}",quotas=false,guestok=false,ca=true "{{ config_applaince_pool }}"/"{{ config_applaince_pool_fs }}"
+
+  - name: set ACL for admin for FS
+    command: chmod A+user:admin:rwxpdDaARWcCos:fd:allow /"{{ config_applaince_pool }}"/"{{ config_applaince_pool_fs }}"
+...

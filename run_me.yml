@@ -1,0 +1,22 @@
+---
+- hosts: localhost
+  gather_facts: no
+  vars_files:
+     - roles/vars/common.yml
+  roles:
+     - { role: create_pxe_env, clean_all: true }
+     - create_and_install_vm
+- hosts: "{{ config_vm_name }}"
+  vars_files:
+     - roles/vars/common.yml
+  roles:
+     - confgure_appliance
+- hosts: smbtorture-hosts
+  gather_facts: no
+  vars_files:
+     - roles/vars/common.yml
+#  pre_tasks:
+#    - name: Put settings.ini to tmp
+  roles:
+     - { role: run_smbtorture,  command: "{{ smbtorture_path }} //{{ hostvars['localhost']['vm_ip'] }}/{{ cif_share }} -U {{ config_applaince_admin }}%{{ config_applaince_admin_pass }} -T w2k12  --signing=required" }
+...
