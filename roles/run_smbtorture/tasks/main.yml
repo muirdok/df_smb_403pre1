@@ -353,7 +353,7 @@
        - smb2.durable-open.reopen2-lease-v2.reopen2-lease-v2
        - smb2.durable-open.reopen2a.reopen2a
        - smb2.durable-open.reopen3.reopen3
-       - smb2.durable-open.reopen4.reopen4
+#       - smb2.durable-open.reopen4.reopen4
        - smb2.durable-open.delete_on_close1.delete_on_close1
        - smb2.durable-open.delete_on_close2.delete_on_close2
        - smb2.durable-open.file-position.file-position
