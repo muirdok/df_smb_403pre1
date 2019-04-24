@@ -1023,7 +1023,7 @@
        - winbind.struct.info.info
        - winbind.struct.priv_pipe_dir.priv_pipe_dir
        - winbind.struct.netbios_name.netbios_name
-       - winbind.struct.domain_name.domain_name
+#       - winbind.struct.domain_name.domain_name
        - winbind.struct.check_machacc.check_machacc
        - winbind.struct.list_trustdom.list_trustdom
        - winbind.struct.domain_info.domain_info
